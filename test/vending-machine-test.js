@@ -3,23 +3,27 @@ const vendingMachine = require("../src/vending-machine.js");
 
 const displayTitle = testing.displayTitle;
 const assert = testing.assert;
+const dispenseCoin = vendingMachine.dispenseCoin
 
-displayTitle("testing for 2 rupee coin ")
-assert(vendingMachine.findNumberOfTwoRupeeCoins(2), 1, " number of coin should be 1 for amount 2.");
-assert(vendingMachine.findNumberOfTwoRupeeCoins(3), 1, " number of coin should be 1 for amount 3.");
-assert(vendingMachine.findNumberOfTwoRupeeCoins(6), 3, " number of coin should be 3 for amount 6.");
-assert(vendingMachine.findNumberOfTwoRupeeCoins(9), 4, " number of coin should be 4 for amount 9.");
-
-
-displayTitle("testing for 5 rupee coin ")
-assert(vendingMachine.findNumberOfFiveRupeeCoins(5), 1, " number of coin should be 1 for amount 5.");
-assert(vendingMachine.findNumberOfFiveRupeeCoins(2), 0, " number of coin should be 0 for amount 2.");
-assert(vendingMachine.findNumberOfFiveRupeeCoins(10), 2, " number of coin should be 2 for amount 10.");
-assert(vendingMachine.findNumberOfFiveRupeeCoins(13), 2, " number of coin should be 2 for amount 13.");
+displayTitle("testing for 1 rupee coin ")
+assert(dispenseCoin(1, [1]), 1, "For amount of 1, total coin should be 1." );
+assert(dispenseCoin(3, [1]), 3, "For amount of 3, total coin should be 3. (Amount is odd)" );
+assert(dispenseCoin(6, [1]), 6, "For amount of 6, total coin should be 6. (Amount is even)" );
 
 
-displayTitle("testing for 10 rupee coin ")
-assert(vendingMachine.findNumberOfTenRupeeCoins(5), 0, " number of coin should be 0 for amount 10.");
-assert(vendingMachine.findNumberOfTenRupeeCoins(10), 1, " number of coin should be 1 for amount 10.");
-assert(vendingMachine.findNumberOfTenRupeeCoins(17), 1, " number of coin should be 1 for amount 17.");
-assert(vendingMachine.findNumberOfTenRupeeCoins(21), 2, " number of coin should be 1 for amount 21.");
+displayTitle("Upgraded for 2 rupee coin as well.")
+assert(dispenseCoin(2, [1, 2]), 1, "For amount of 2, total coin should be 1. (Only 2 rupee coin.)");
+assert(dispenseCoin(4, [1, 2]), 2, "For amount of 4, total coin should be 2. (Only 2 rupee coin.)");
+assert(dispenseCoin(3, [1, 2]), 2, "For amount of 3, total coin should be 2. (Both 1 and 2 rupee coin.)");
+
+displayTitle("Upgraded for 5 rupee coin as well.")
+assert(dispenseCoin(5, [1, 2, 5]), 1, "For amount of 5, total coin should be 1. (Only 5 rupee coin.)");
+assert(dispenseCoin(3, [1, 2, 5]), 2, "For amount of 3, total coin should be 2. (Excluding 5 rupee coin.)");
+assert(dispenseCoin(7, [1, 2, 5]), 2, "For amount of 7, total coin should be 2. (Including 5 and 2 rupee coin.)");
+assert(dispenseCoin(13, [1, 2, 5]), 4, "For amount of 13, total coin should be 2. (Including all coins.)");
+
+displayTitle("Upgraded for 10 rupee coin as well.")
+assert(dispenseCoin(10, [1, 2, 5, 10]), 1, "For amount of 10, total coin should be 1. (Only 10 rupee coin.)");
+assert(dispenseCoin(15, [1, 2, 5, 10]), 2, "For amount of 15, total coin should be 2. (Including 10 and 5 rupee coin.)");
+assert(dispenseCoin(8, [1, 2, 5, 10]), 3, "For amount of 8, total coin should be 2. (Excluding 10 rupee coin.)");
+assert(dispenseCoin(18, [1, 2, 5, 10]), 4, "For amount of 18, total coin should be 4. (Including all coin.)");

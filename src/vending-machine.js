@@ -1,5 +1,5 @@
-const dispenceOneRupees= function(rupee) {
-  return rupee;
+const findNumberOfTwoRupeeCoin= function(amount) {
+  return Math.floor(amount / 2);
 }
 
-exports.dispenceOneRupees = dispenceOneRupees;
+exports.findNumberOfTwoRupeeCoin = findNumberOfTwoRupeeCoin;

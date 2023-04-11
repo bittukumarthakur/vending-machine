@@ -17,3 +17,9 @@ assert(vendingMachine.findNumberOfFiveRupeeCoins(2), 0, " number of coin should 
 assert(vendingMachine.findNumberOfFiveRupeeCoins(10), 2, " number of coin should be 2 for amount 10.");
 assert(vendingMachine.findNumberOfFiveRupeeCoins(13), 2, " number of coin should be 2 for amount 13.");
 
+
+displayTitle("testing for 10 rupee coin ")
+assert(vendingMachine.findNumberOfTenRupeeCoins(5), 0, " number of coin should be 0 for amount 10.");
+assert(vendingMachine.findNumberOfTenRupeeCoins(10), 1, " number of coin should be 1 for amount 10.");
+assert(vendingMachine.findNumberOfTenRupeeCoins(17), 1, " number of coin should be 1 for amount 17.");
+assert(vendingMachine.findNumberOfTenRupeeCoins(21), 2, " number of coin should be 1 for amount 21.");

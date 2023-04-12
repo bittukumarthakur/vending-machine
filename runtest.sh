@@ -1,1 +1,1 @@
-autorun node test/vending-machine-test.js
+node test/vending-machine-test.js

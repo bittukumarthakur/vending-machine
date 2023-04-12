@@ -29,4 +29,7 @@ assert(dispenseCoin(15, [1, 2, 5, 10]), 2, "For amount of 15, total coin should 
 assert(dispenseCoin(8, [1, 2, 5, 10]), 3, "For amount of 8, total coin should be 2. (Excluding 10 rupee coin.)");
 assert(dispenseCoin(18, [1, 2, 5, 10]), 4, "For amount of 18, total coin should be 4. (Including all coin.)");
 
+displayTitle("Testing for coinset 1,4,7.");
+assert(dispenseCoin(13, [1, 4, 7]), 4, "For amount of 13, total coin should be 4.");
+
 displaySummary();

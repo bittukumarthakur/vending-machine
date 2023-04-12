@@ -3,6 +3,7 @@ const vendingMachine = require("../src/vending-machine.js");
 
 const displayTitle = testing.displayTitle;
 const assert = testing.assert;
+const displaySummary = testing.displaySummary;
 const dispenseCoin = vendingMachine.dispenseCoin
 
 displayTitle("testing for 1 rupee coin ")
@@ -27,3 +28,5 @@ assert(dispenseCoin(10, [1, 2, 5, 10]), 1, "For amount of 10, total coin should 
 assert(dispenseCoin(15, [1, 2, 5, 10]), 2, "For amount of 15, total coin should be 2. (Including 10 and 5 rupee coin.)");
 assert(dispenseCoin(8, [1, 2, 5, 10]), 3, "For amount of 8, total coin should be 2. (Excluding 10 rupee coin.)");
 assert(dispenseCoin(18, [1, 2, 5, 10]), 4, "For amount of 18, total coin should be 4. (Including all coin.)");
+
+displaySummary();

@@ -28,16 +28,17 @@ const vendingMachineTest = function() {
   assert(dispenseCoin(13, [1, 2, 5]), 4, "For amount of 13, total coin should be 2. (Including all coins.)");
 
   displayTitle("Upgraded for 10 rupee coin as well.")
-  //  assert(dispenseCoin(10, [1, 2, 5, 10]), 1, "For amount of 10, total coin should be 1. (Only 10 rupee coin.)");
-  // assert(dispenseCoin(15, [1, 2, 5, 10]), 2, "For amount of 15, total coin should be 2. (Including 10 and 5 rupee coin.)");
+  assert(dispenseCoin(10, [1, 2, 5, 10]), 1, "For amount of 10, total coin should be 1. (Only 10 rupee coin.)");
+  assert(dispenseCoin(15, [1, 2, 5, 10]), 2, "For amount of 15, total coin should be 2. (Including 10 and 5 rupee coin.)");
   assert(dispenseCoin(8, [1, 2, 5, 10]), 3, "For amount of 8, total coin should be 2. (Excluding 10 rupee coin.)");
-  // assert(dispenseCoin(18, [1, 2, 5, 10]), 4, "For amount of 18, total coin should be 4. (Including all coin.)");
+  assert(dispenseCoin(18, [1, 2, 5, 10]), 4, "For amount of 18, total coin should be 4. (Including all coin.)");
 
   displayTitle("Testing for coinset 1,4,7.");
   assert(dispenseCoin(13, [1, 4, 7]), 4, "For amount of 13, total coin should be 4.");
 
   displayTitle("Testing for unordered set of coin");
-  //  assert(dispenseCoin(13, [4, 1, 7]), 4, "For amount of 13, total coin should be 4.");
+  assert(dispenseCoin(13, [4, 1, 7]), 4, "For amount of 13, total coin should be 4.(list is [4, 1, 7])");
+  assert(dispenseCoin(18, [2, 5, 10, 1]), 4, "For amount of 18, total coin should be 4.(list is [2, 5, 10, 1])");
 }
 
 vendingMachineTest();

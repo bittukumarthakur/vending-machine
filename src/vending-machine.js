@@ -3,7 +3,7 @@ const findNumberOfCoins = function(amount, coinValue) {
 }
 
 const dispenseCoin = function(amount, coinList) {
-  const reversedCoinList = coinList.reverse();
+  const reversedCoinList = sort(coinList);
   let remainingAmount = amount;
   let numberOfCoins = 0;
 

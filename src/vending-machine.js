@@ -3,8 +3,7 @@ const findNumberOfCoins = function(amount, coinValue) {
 }
 
 const dispenseCoin = function(amount, coinList) {
-  const sortedCoinList = coinList.sort();
-  const reversedCoinList = sortedCoinList.reverse();
+  const reversedCoinList = coinList.reverse();
   let remainingAmount = amount;
   let numberOfCoins = 0;
 
@@ -36,6 +35,19 @@ const deleteElement = function(list, element) {
   return result;
 }
 
+const sort = function(list) {
+  let currentList = list.slice();
+  let sortedList = [];
+
+  for (let i = 0; i < list.length; i++) {
+    const currentMax = sortMax(currentList);
+    sortedList.push(currentMax);
+    currentList = deleteElement(currentList, currentMax);
+  }
+  return sortedList;
+}
+
 exports.dispenseCoin = dispenseCoin;
 exports.sortMax = sortMax;
 exports.deleteElement = deleteElement;
+exports.sort = sort;

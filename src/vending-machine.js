@@ -30,5 +30,12 @@ const sortMax = function(list) {
   return max;
 }
 
+const deleteElement = function(list, element) {
+  const index = list.indexOf(element);
+  const result = list.slice(0,index).concat(list.slice(index + 1));
+  return result;
+}
+
 exports.dispenseCoin = dispenseCoin;
 exports.sortMax = sortMax;
+exports.deleteElement = deleteElement;

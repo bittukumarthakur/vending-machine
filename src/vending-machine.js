@@ -18,15 +18,15 @@ const dispenseCoin = function(amount, coinList) {
 
 }
 
-const sortMax = function(list) {
-  let  max = 0;
+const max = function(list) {
+  let currentmax = 0;
   for (const term of list) {
-    if (term > max) {
-      max = term;
+    if (term > currentmax) {
+      currentmax = term;
     };
   }
 
-  return max;
+  return currentmax;
 }
 
 const deleteElement = function(list, element) {
@@ -40,7 +40,7 @@ const sort = function(list) {
   let sortedList = [];
 
   for (let i = 0; i < list.length; i++) {
-    const currentMax = sortMax(currentList);
+    const currentMax = max(currentList);
     sortedList.push(currentMax);
     currentList = deleteElement(currentList, currentMax);
   }
@@ -48,6 +48,6 @@ const sort = function(list) {
 }
 
 exports.dispenseCoin = dispenseCoin;
-exports.sortMax = sortMax;
+exports.max = max;
 exports.deleteElement = deleteElement;
 exports.sort = sort;

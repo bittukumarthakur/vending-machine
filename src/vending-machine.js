@@ -47,7 +47,26 @@ const dispenseCoin = function(amount, coinList) {
   };
 }
 
+// const denominationBy = function(amount, coinList) {
+
+//  return { 1: 1, 2: 1};
+//}
+
+const denominationBy = function(amount, coinList) {
+  const reversedCoinList = sort(coinList);
+  let remainingAmount = amount;
+  let denominationTable = {};
+
+  for (let coin of reversedCoinList) {
+    const currentNumberOfCoins = findNumberOfCoins(remainingAmount, coin);
+    remainingAmount = remainingAmount % coin;
+    denominationTable[coin] = currentNumberOfCoins;
+  };
+  return denominationTable; 
+}
+
 exports.dispenseCoin = dispenseCoin;
 exports.max = max;
 exports.deleteElement = deleteElement;
 exports.sort = sort;
+exports.denominationBy = denominationBy;

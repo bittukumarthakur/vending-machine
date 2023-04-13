@@ -10,13 +10,13 @@ const dispenseCoin = vendingMachine.dispenseCoin;
 const max = vendingMachine.max;
 const deleteElement = vendingMachine.deleteElement;
 const sort = vendingMachine.sort;
+const denominationBy = vendingMachine.denominationBy;
 
 const vendingMachineTest = function() {
   displayTitle("testing for 1 rupee coin ")
   assert(dispenseCoin(1, [1]), 1, "For amount of 1, total coin should be 1." );
   assert(dispenseCoin(3, [1]), 3, "For amount of 3, total coin should be 3. (Amount is odd)" );
   assert(dispenseCoin(6, [1]), 6, "For amount of 6, total coin should be 6. (Amount is even)" );
-
 
   displayTitle("Upgraded for 2 rupee coin as well.")
   assert(dispenseCoin(2, [1, 2]), 1, "For amount of 2, total coin should be 1. (Only 2 rupee coin.)");
@@ -65,3 +65,9 @@ const sortTest = function() {
 vendingMachineTest();
 sortTest();
 displaySummary();
+
+
+displayTitle("Testing for denomination by coin[ 1, 2 ] and amount is 3.");
+
+assert(denominationBy(3, [ 1 ,2 ])[1], 1, " 1 rupee coin should be 1.");
+assert(denominationBy(3, [ 1 ,2 ])[2], 1, " 2 rupee coin should be 1.");

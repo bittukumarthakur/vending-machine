@@ -64,10 +64,23 @@ const sortTest = function() {
 
 vendingMachineTest();
 sortTest();
+
+displayTitle("Testing for coin[ 1, 2 ] by denomination and amount is 3.");
+let denominationTable = denominationBy(3, [ 1, 2 ]);
+assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
+assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
+
+displayTitle("Testing for coin[ 1, 2, 5 ] by denomination and amount is 8.");
+denominationTable = denominationBy(8, [ 1, 2, 5 ]);
+assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
+assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
+assert(denominationTable[5], 1, " 5 rupee coin should be 1.");
+
+displayTitle("Testing for coin[ 1, 2, 5, 10 ] by denomination and amount is 13.");
+denominationTable = denominationBy(13, [ 1, 2, 5, 10 ]);
+assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
+assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
+assert(denominationTable[5], 0, " 5 rupee coin should be 0.");
+assert(denominationTable[10], 1, " 10 rupee coin should be 1.");
+
 displaySummary();
-
-
-displayTitle("Testing for denomination by coin[ 1, 2 ] and amount is 3.");
-
-assert(denominationBy(3, [ 1 ,2 ])[1], 1, " 1 rupee coin should be 1.");
-assert(denominationBy(3, [ 1 ,2 ])[2], 1, " 2 rupee coin should be 1.");

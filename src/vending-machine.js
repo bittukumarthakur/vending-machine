@@ -47,13 +47,8 @@ const dispenseCoin = function(amount, coinList) {
   };
 }
 
-// const denominationBy = function(amount, coinList) {
-
-//  return { 1: 1, 2: 1};
-//}
-
-const denominationBy = function(amount, coinList) {
-  const reversedCoinList = sort(coinList);
+const denominationBy = function(amount, coins) {
+  const reversedCoinList = sort(coins);
   let remainingAmount = amount;
   let denominationTable = {};
 
@@ -62,6 +57,7 @@ const denominationBy = function(amount, coinList) {
     remainingAmount = remainingAmount % coin;
     denominationTable[coin] = currentNumberOfCoins;
   };
+
   return denominationTable; 
 }
 

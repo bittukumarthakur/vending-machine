@@ -10,7 +10,7 @@ const dispenseCoin = vendingMachine.dispenseCoin;
 const max = vendingMachine.max;
 const deleteElement = vendingMachine.deleteElement;
 const sort = vendingMachine.sort;
-const denominationBy = vendingMachine.denominationBy;
+const dispenseCoinDetails = vendingMachine.dispenseCoinDetails;
 
 const vendingMachineTest = function() {
   displayTitle("testing for 1 rupee coin ")
@@ -45,14 +45,13 @@ const vendingMachineTest = function() {
 
 
 const sortTest = function() {
-
-  displayTitle("Testing for sortmax.");
+  displayTitle("Testing for max.");
   assertArray(max([4, 1, 7]), 7, " Max is 7 in 4, 1, 7");
   assertArray(max([4, 15, 7]), 15, " Max is 15 in 4, 15, 7");
 
   displayTitle("Testing for deleting element.");
-  assertArray(deleteElement([4, 1, 7], 7), [4, 1], " deleting 7 from [4, 7, 1], array should be [4, 1].");
-  assertArray(deleteElement([4, 1, 7, 9, 8], 1), [4, 7, 9, 8], " deleting 1 from [4, 1, 7, 9, 8], then array is [4, 7, 9, 8].");
+  assertArray(deleteElement([ 4, 1, 7 ], 7), [ 4, 1 ], " deleting 7 from [4, 7, 1], array should be [4, 1].");
+  assertArray(deleteElement([ 4, 1, 7, 9, ], 1), [ 4, 7, 9 ], " After deleting is [4, 7, 9, 8].");
 
   displayTitle("Testing for sort.");
   assertArray(sort([1, 2]), [2, 1], "[1,2] after short should be [2, 1].");
@@ -62,25 +61,32 @@ const sortTest = function() {
   assert(isArrayEqual([1, 2], [1, 2]), true, " [1, 2] should be equal to [1, 2].")
 }
 
-vendingMachineTest();
-sortTest();
+const dispenseCoinDetailsTest = function() {
+  displayTitle("Testing for coin[ 1, 2 ] by denomination and amount is 3.");
+  let denominationTable = dispenseCoinDetails(3, [ 1, 2 ]);
+  assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
+  assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
 
-displayTitle("Testing for coin[ 1, 2 ] by denomination and amount is 3.");
-let denominationTable = denominationBy(3, [ 1, 2 ]);
-assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
-assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
+  displayTitle("Testing for coin[ 1, 2, 5 ] by denomination and amount is 8.");
+  denominationTable = dispenseCoinDetails(8, [ 1, 2, 5 ]);
+  assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
+  assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
+  assert(denominationTable[5], 1, " 5 rupee coin should be 1.");
 
-displayTitle("Testing for coin[ 1, 2, 5 ] by denomination and amount is 8.");
-denominationTable = denominationBy(8, [ 1, 2, 5 ]);
-assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
-assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
-assert(denominationTable[5], 1, " 5 rupee coin should be 1.");
+  displayTitle("Testing for coin[ 1, 2, 5, 10 ] by denomination and amount is 13.");
+  denominationTable = dispenseCoinDetails(13, [ 1, 2, 5, 10 ]);
+  assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
+  assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
+  assert(denominationTable[5], 0, " 5 rupee coin should be 0.");
+  assert(denominationTable[10], 1, " 10 rupee coin should be 1.");
+}
 
-displayTitle("Testing for coin[ 1, 2, 5, 10 ] by denomination and amount is 13.");
-denominationTable = denominationBy(13, [ 1, 2, 5, 10 ]);
-assert(denominationTable[1], 1, " 1 rupee coin should be 1.");
-assert(denominationTable[2], 1, " 2 rupee coin should be 1.");
-assert(denominationTable[5], 0, " 5 rupee coin should be 0.");
-assert(denominationTable[10], 1, " 10 rupee coin should be 1.");
+const runTest = function() {
+  vendingMachineTest();
+  sortTest();
+  dispenseCoinDetailsTest();
+  displaySummary();
+}
 
-displaySummary();
+runTest();
+

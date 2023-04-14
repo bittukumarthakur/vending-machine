@@ -32,12 +32,12 @@ const sort = function(list) {
   return sortedList;
 }
 
-const dispenseCoin = function(amount, coinList) {
-  const reversedCoinList = sort(coinList);
+const dispenseCoin = function(amount, coins) {
+  const sortedCoins = sort(coins);
   let remainingAmount = amount;
   let numberOfCoins = 0;
 
-  for (let coin of reversedCoinList) {
+  for (let coin of sortedCoins) {
     numberOfCoins += findNumberOfCoins(remainingAmount, coin);
     remainingAmount = remainingAmount % coin;
 
@@ -47,22 +47,22 @@ const dispenseCoin = function(amount, coinList) {
   };
 }
 
-const denominationBy = function(amount, coins) {
+const dispenseCoinDetails = function(amount, coins) {
   const reversedCoinList = sort(coins);
   let remainingAmount = amount;
-  let denominationTable = {};
+  let coinsDetail = {};
 
   for (let coin of reversedCoinList) {
     const currentNumberOfCoins = findNumberOfCoins(remainingAmount, coin);
     remainingAmount = remainingAmount % coin;
-    denominationTable[coin] = currentNumberOfCoins;
+    coinsDetail[coin] = currentNumberOfCoins;
   };
 
-  return denominationTable; 
+  return coinsDetail; 
 }
 
 exports.dispenseCoin = dispenseCoin;
 exports.max = max;
 exports.deleteElement = deleteElement;
 exports.sort = sort;
-exports.denominationBy = denominationBy;
+exports.dispenseCoinDetails = dispenseCoinDetails;

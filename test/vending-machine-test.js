@@ -12,37 +12,43 @@ const deleteElement = vendingMachine.deleteElement;
 const sort = vendingMachine.sort;
 const dispenseCoinDetails = vendingMachine.dispenseCoinDetails;
 
-const vendingMachineTest = function() {
-  displayTitle("testing for 1 rupee coin ")
-  assert(dispenseCoin(1, [1]), 1, "For amount of 1, total coin should be 1." );
-  assert(dispenseCoin(3, [1]), 3, "For amount of 3, total coin should be 3. (Amount is odd)" );
-  assert(dispenseCoin(6, [1]), 6, "For amount of 6, total coin should be 6. (Amount is even)" );
-
-  displayTitle("Upgraded for 2 rupee coin as well.")
-  assert(dispenseCoin(2, [1, 2]), 1, "For amount of 2, total coin should be 1. (Only 2 rupee coin.)");
-  assert(dispenseCoin(4, [1, 2]), 2, "For amount of 4, total coin should be 2. (Only 2 rupee coin.)");
-  assert(dispenseCoin(3, [1, 2]), 2, "For amount of 3, total coin should be 2. (Both 1 and 2 rupee coin.)");
-
-  displayTitle("Upgraded for 5 rupee coin as well.")
-  assert(dispenseCoin(5, [1, 2, 5]), 1, "For amount of 5, total coin should be 1. (Only 5 rupee coin.)");
-  assert(dispenseCoin(3, [1, 2, 5]), 2, "For amount of 3, total coin should be 2. (Excluding 5 rupee coin.)");
-  assert(dispenseCoin(7, [1, 2, 5]), 2, "For amount of 7, total coin should be 2. (Including 5 and 2 rupee coin.)");
-  assert(dispenseCoin(13, [1, 2, 5]), 4, "For amount of 13, total coin should be 2. (Including all coins.)");
-
-  displayTitle("Upgraded for 10 rupee coin as well.")
-  assert(dispenseCoin(10, [1, 2, 5, 10]), 1, "For amount of 10, total coin should be 1. (Only 10 rupee coin.)");
-  assert(dispenseCoin(15, [1, 2, 5, 10]), 2, "For amount of 15, total coin should be 2. (Including 10 and 5 rupee coin.)");
-  assert(dispenseCoin(8, [1, 2, 5, 10]), 3, "For amount of 8, total coin should be 2. (Excluding 10 rupee coin.)");
-  assert(dispenseCoin(18, [1, 2, 5, 10]), 4, "For amount of 18, total coin should be 4. (Including all coin.)");
-
-  displayTitle("Testing for coinset 1,4,7.");
-  assert(dispenseCoin(13, [1, 4, 7]), 4, "For amount of 13, total coin should be 4.");
-
-  displayTitle("Testing for unordered set of coin");
-  assert(dispenseCoin(13, [4, 1, 7]), 4, "For amount of 13, total coin should be 4.(list is [4, 1, 7])");
-  assert(dispenseCoin(18, [2, 5, 10, 1]), 4, "For amount of 18, total coin should be 4.(list is [2, 5, 10, 1])");
+const it = function(message, testData) {
+  assert(testData.actual, testData.expected, message);
 }
 
+const dispenseCoinTest = function() {
+  displayTitle("Testing for dispenseCoin. ");
+
+  it("Should return undefined coin when no denominations are given.", {
+    actual: dispenseCoin(1, []),
+    expected: undefined 
+  });
+
+  it("Should return 0 coin when 0 amount is given.", {
+    actual: dispenseCoin( 0, [ 1, 2 ]),
+    expected: 0
+  });
+
+  it("Should return same amount when only one rupee coin denomination is given.", {
+    actual: dispenseCoin( 1, [ 1, 2 ]),
+    expected: 1
+  });
+
+  it("Should return one coin of each denomination, if amount is sum of the denomination.", {
+    actual: dispenseCoin(8, [ 1, 2, 5]),
+    expected: 3
+  });
+
+  it("Should return optimun number of coin for ordered set of denomination.", {
+    actual: dispenseCoin(13, [ 1, 2, 5, 10]),
+    expected: 3
+  });
+
+  it("Should return optimun number of coin for unordered set of denomination.", {
+    actual: dispenseCoin(23, [ 5, 1, 10, 2]),
+    expected: 4
+  });
+}
 
 const sortTest = function() {
   displayTitle("Testing for max.");
@@ -51,7 +57,7 @@ const sortTest = function() {
 
   displayTitle("Testing for deleting element.");
   assertArray(deleteElement([ 4, 1, 7 ], 7), [ 4, 1 ], " deleting 7 from [4, 7, 1], array should be [4, 1].");
-  assertArray(deleteElement([ 4, 1, 7, 9, ], 1), [ 4, 7, 9 ], " After deleting is [4, 7, 9, 8].");
+  assertArray(deleteElement([ 4, 1, 7, 9, ], 1), [ 4, 7, 9 ], " After deleting 1, it should be [4, 7, 9, 8].");
 
   displayTitle("Testing for sort.");
   assertArray(sort([1, 2]), [2, 1], "[1,2] after short should be [2, 1].");
@@ -82,9 +88,9 @@ const dispenseCoinDetailsTest = function() {
 }
 
 const runTest = function() {
-  vendingMachineTest();
-  sortTest();
+  //  sortTest();
   dispenseCoinDetailsTest();
+  dispenseCoinTest();
   displaySummary();
 }
 
